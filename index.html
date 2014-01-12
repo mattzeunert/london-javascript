@@ -1,120 +1,276 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- saved from url=(0087)file://localhost/Users/mattzeunert/Google%20Drive/projects/london-javascript/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>London Javascript talks and meetups</title>
+	</head>
+	<body style="">
+		<h1>Javascript meetups in London</h1>
+		<p>
+			A collection of Javascript-related meetups in London.
+		</p>
 
-<title>London Javascript talks and meetups</title>
+		<h2>Ajax user group</h2>
 
-<h2>Ajax user group</h2>
+		<div class="london-ajax">
+			<table>
+				
+					<tbody><tr>
+						<td>Using AngularJS and TypeScript</td>
+						<td>
+							<!--
+								-->Jamie McCrindle<!--
+							--><!--
+								-->, Santi Albo<!--
+							-->
+						</td>
+						<td>2014-1-14</td>
+					</tr>
+				
+					<tr>
+						<td>Managing Responsive Design Breakpionts in Javascript</td>
+						<td>
+							<!--
+								-->Jonathon Fielding<!--
+							-->
+						</td>
+						<td>2013-11-12</td>
+					</tr>
+				
+					<tr>
+						<td>Building a JavaScript code-quality tracker</td>
+						<td>
+							<!--
+								-->Tim Ruffles<!--
+							-->
+						</td>
+						<td>2013-11-12</td>
+					</tr>
+				
+					<tr>
+						<td>Dojo package updates</td>
+						<td>
+							<!--
+								-->Dylan Schienemann<!--
+							-->
+						</td>
+						<td>2013-10-16</td>
+					</tr>
+				
+					<tr>
+						<td>Dijit Already Did That: Exploring Web Components</td>
+						<td>
+							<!--
+								-->Kitson Keylly<!--
+							-->
+						</td>
+						<td>2013-10-16</td>
+					</tr>
+				
+					<tr>
+						<td>i18n - translation in JavaScript</td>
+						<td>
+							<!--
+								-->Stefano Solinas<!--
+							-->
+						</td>
+						<td>2013-9-10</td>
+					</tr>
+				
+					<tr>
+						<td>Server-Sent Events: half of the WebSocket, twice the speed</td>
+						<td>
+							<!--
+								-->Kornel Lesinski<!--
+							-->
+						</td>
+						<td>2013-9-10</td>
+					</tr>
+				
+					<tr>
+						<td>Nashorn for the Community</td>
+						<td>
+							<!--
+								-->Ben Evans<!--
+							-->
+						</td>
+						<td>2013-8-13</td>
+					</tr>
+				
+					<tr>
+						<td>Why Curry?</td>
+						<td>
+							<!--
+								-->Hugh Jackson<!--
+							-->
+						</td>
+						<td>2013-8-13</td>
+					</tr>
+				
+			</tbody></table>
+		</div>
 
-<div class="london-ajax"></div>
+		<h2>London node user group</h2>
 
-<h2>London node user group</h2>
+		<div class="lnug">
+			<table>
+				
+					<tbody><tr>
+						<td>Resin.io - JS on your Raspberry Pi with a simple 'git push'</td>
+						<td>
+							<!--
+								-->Alexandros Marinos<!--
+							-->
+						</td>
+						<td>2014-1-20</td>
+					</tr>
+				
+					<tr>
+						<td>UX for your Node modules</td>
+						<td>
+							<!--
+								-->Rowan Manning<!--
+							-->
+						</td>
+						<td>2014-1-20</td>
+					</tr>
+				
+					<tr>
+						<td>Megatron - Javascript-to-javascript compiler</td>
+						<td>
+							<!--
+								-->Tristan Foureur<!--
+							-->
+						</td>
+						<td>2013-11-27</td>
+					</tr>
+				
+					<tr>
+						<td>Selling Javascript to Clients</td>
+						<td>
+							<!--
+								-->Jonathan Anthony<!--
+							-->
+						</td>
+						<td>2013-11-27</td>
+					</tr>
+				
+					<tr>
+						<td>Hoodie plugins</td>
+						<td>
+							<!--
+								-->Alan Shaw<!--
+							-->
+						</td>
+						<td>2013-11-27</td>
+					</tr>
+				
+			</tbody></table>
+		</div>
 
-<div class="lnug"></div>
-
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
-<script type="template" id="meetup-talk-list-template">
-	<table>
-		{{#each talks}}
-			<tr>
-				<td>{{title}}</td>
-				<td>
-					{{#each speakers}}<!--
-						-->{{#if @index}}, {{/if}}{{this}}<!--
-					-->{{/each}}
-				</td>
-				<td>{{formatDate date}}</td>
-			</tr>
-		{{/each}}
-	</table>
-</script>
-<script>
-
-Handlebars.registerHelper("formatDate", function(date) {
-  return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-});
-
-
-// other fields :video
-var londonAjaxTalks = [{
-		title: "Using AngularJS and TypeScript",
-		speakers: ["Jamie McCrindle", "Santi Albo"],
-		date: new Date(2014, 0, 14)
-	},
-	{
-		title: "Managing Responsive Design Breakpionts in Javascript",
-		speakers: ["Jonathon Fielding"],
-		date: new Date(2013, 10, 12)
-	},
-	{
-		title: "Building a JavaScript code-quality tracker",
-		speakers: ["Tim Ruffles"],
-		date: new Date(2013, 10, 12)
-	},
-	{
-		title: "Dojo package updates",
-		speakers: ["Dylan Schienemann"],
-		date: new Date(2013, 9, 16)
-	},
-	{
-		title: "Dijit Already Did That: Exploring Web Components",
-		speakers: ["Kitson Keylly"],
-		date: new Date(2013, 9, 16)
-	},
-	{
-		title: "i18n - translation in JavaScript",
-		speakers: ["Stefano Solinas"],
-		date: new Date(2013, 08, 10)
-	},
-	{
-		title: "Server-Sent Events: half of the WebSocket, twice the speed",
-		speakers: ["Kornel Lesinski"],
-		date: new Date(2013, 08, 10)
-	},
-	{
-		title: "Nashorn for the Community",
-		speakers: ["Ben Evans"],
-		date: new Date(2013, 07, 13)
-	},
-	{
-		title: "Why Curry?",
-		speakers: ["Hugh Jackson"],
-		date: new Date(2013, 07, 13)
-	}
-]
-
-var lnugTalks = [
-	{
-		title: "Resin.io - JS on your Raspberry Pi with a simple 'git push'",
-		speakers: ["Alexandros Marinos"],
-		date: new Date(2014, 0, 20)
-	},
-	{
-		title: "UX for your Node modules",
-		speakers: ["Rowan Manning"],
-		date: new Date(2014, 0, 20)
-	},
-	{
-		title: "Megatron - Javascript-to-javascript compiler",
-		speakers: ["Tristan Foureur"],
-		date: new Date(2013, 10, 27)
-	},
-	{
-		title: "Selling Javascript to Clients",
-		speakers: ["Jonathan Anthony"],
-		date: new Date(2013, 10, 27)
-	},
-	{
-		title: "Hoodie plugins",
-		speakers: ["Alan Shaw"],
-		date: new Date(2013, 10, 27)
-	}
-]
-
-var templateHtml = $("#meetup-talk-list-template").html(),
-	template = Handlebars.compile(templateHtml);
-
-$(".london-ajax").append(template({talks: londonAjaxTalks}))
-$(".lnug").append(template({talks: lnugTalks}))
+		<script src="./output_files/jquery-1.10.1.min.js"></script>
+		<script src="./output_files/handlebars.min.js"></script>
+		<script type="template" id="meetup-talk-list-template">
+			<table>
+				{{#each talks}}
+					<tr>
+						<td>{{title}}</td>
+						<td>
+							{{#each speakers}}<!--
+								-->{{#if @index}}, {{/if}}{{this}}<!--
+							-->{{/each}}
+						</td>
+						<td>{{formatDate date}}</td>
+					</tr>
+				{{/each}}
+			</table>
+		</script>
+		<script>
+			Handlebars.registerHelper("formatDate", function(date) {
+				return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+			});
 
 
-</script>
+			// other fields :video
+			var londonAjaxTalks = [{
+					title: "Using AngularJS and TypeScript",
+					speakers: ["Jamie McCrindle", "Santi Albo"],
+					date: new Date(2014, 0, 14)
+				},
+				{
+					title: "Managing Responsive Design Breakpionts in Javascript",
+					speakers: ["Jonathon Fielding"],
+					date: new Date(2013, 10, 12)
+				},
+				{
+					title: "Building a JavaScript code-quality tracker",
+					speakers: ["Tim Ruffles"],
+					date: new Date(2013, 10, 12)
+				},
+				{
+					title: "Dojo package updates",
+					speakers: ["Dylan Schienemann"],
+					date: new Date(2013, 9, 16)
+				},
+				{
+					title: "Dijit Already Did That: Exploring Web Components",
+					speakers: ["Kitson Keylly"],
+					date: new Date(2013, 9, 16)
+				},
+				{
+					title: "i18n - translation in JavaScript",
+					speakers: ["Stefano Solinas"],
+					date: new Date(2013, 08, 10)
+				},
+				{
+					title: "Server-Sent Events: half of the WebSocket, twice the speed",
+					speakers: ["Kornel Lesinski"],
+					date: new Date(2013, 08, 10)
+				},
+				{
+					title: "Nashorn for the Community",
+					speakers: ["Ben Evans"],
+					date: new Date(2013, 07, 13)
+				},
+				{
+					title: "Why Curry?",
+					speakers: ["Hugh Jackson"],
+					date: new Date(2013, 07, 13)
+				}
+			]
+
+			var lnugTalks = [
+				{
+					title: "Resin.io - JS on your Raspberry Pi with a simple 'git push'",
+					speakers: ["Alexandros Marinos"],
+					date: new Date(2014, 0, 20)
+				},
+				{
+					title: "UX for your Node modules",
+					speakers: ["Rowan Manning"],
+					date: new Date(2014, 0, 20)
+				},
+				{
+					title: "Megatron - Javascript-to-javascript compiler",
+					speakers: ["Tristan Foureur"],
+					date: new Date(2013, 10, 27)
+				},
+				{
+					title: "Selling Javascript to Clients",
+					speakers: ["Jonathan Anthony"],
+					date: new Date(2013, 10, 27)
+				},
+				{
+					title: "Hoodie plugins",
+					speakers: ["Alan Shaw"],
+					date: new Date(2013, 10, 27)
+				}
+			]
+
+			var templateHtml = $("#meetup-talk-list-template").html(),
+				template = Handlebars.compile(templateHtml);
+
+			$(".london-ajax").append(template({talks: londonAjaxTalks}))
+			$(".lnug").append(template({talks: lnugTalks}))
+		</script>
+	
+</body></html>
