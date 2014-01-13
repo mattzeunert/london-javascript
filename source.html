@@ -4,123 +4,184 @@
 		<title>London Javascript talks and meetups</title>
 	</head>
 	<body>
-		<h1>Javascript meetups in London</h1>
-		<p>
-			A collection of Javascript-related meetups in London.
-		</p>
+		<div class="wrapper">
+			<h1>Javascript meetups in London</h1>
+			<p>
+				A list of Javascript-related meetups and talks in London.
+			</p>
 
-		<h2>Ajax user group</h2>
+			<h2>Upcoming talks</h2>
 
-		<div class="london-ajax"></div>
+			<div class="upcoming-talks"></div>
 
-		<h2>London node user group</h2>
+			<h2>Ajax user group</h2>
 
-		<div class="lnug"></div>
+			<div class="london-ajax"></div>
 
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
-		<script type="template" id="meetup-talk-list-template">
-			<table>
-				{{#each talks}}
-					<tr>
-						<td>{{title}}</td>
-						<td>
+			<h2>London node user group</h2>
+
+			<div class="lnug"></div>
+
+			<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+			<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+			<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+			<script src="moment.min.js"></script>
+			<script class="keep">
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-47100457-1', 'londonjavascript.com');
+			  ga('send', 'pageview');
+
+			</script>
+			<script type="template" id="meetup-talk-list-template">
+				<div class="pure-g">
+					{{#each talks}}
+						<div class="pure-u-1-2">
+							<h3>
+								{{title}}
+							</h3>
+						</div>
+						<div class="pure-u-1-4">
 							{{#each speakers}}<!--
 								-->{{#if @index}}, {{/if}}{{this}}<!--
 							-->{{/each}}
-						</td>
-						<td>{{formatDate date}}</td>
-					</tr>
-				{{/each}}
-			</table>
-		</script>
-		<script>
-			Handlebars.registerHelper("formatDate", function(date) {
-				return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-			});
+						</div>
+						<div class="pure-u-1-4">
+							{{formatDate date}}
+						</div>
+					{{/each}}
+				</div>
+			</script>
+			<script>
+				Handlebars.registerHelper("formatDate", function(date) {
+					function removeTime(date){
+						date.setHours(0);
+						date.setMinutes(0);
+						date.setSeconds(0);
+						date.setMilliseconds(0);
+						return date;
+					}
+					function isTomorrow(date){
+						var now = removeTime(new Date()),
+							date = removeTime(new Date(date));
+
+						now.setDate(now.getDate() + 1);
+
+						if (now.valueOf() === date.valueOf()){
+							return true;
+						}
+					}
 
 
-			// other fields :video
-			var londonAjaxTalks = [{
-					title: "Using AngularJS and TypeScript",
-					speakers: ["Jamie McCrindle", "Santi Albo"],
-					date: new Date(2014, 0, 14)
-				},
-				{
-					title: "Managing Responsive Design Breakpionts in Javascript",
-					speakers: ["Jonathon Fielding"],
-					date: new Date(2013, 10, 12)
-				},
-				{
-					title: "Building a JavaScript code-quality tracker",
-					speakers: ["Tim Ruffles"],
-					date: new Date(2013, 10, 12)
-				},
-				{
-					title: "Dojo package updates",
-					speakers: ["Dylan Schienemann"],
-					date: new Date(2013, 9, 16)
-				},
-				{
-					title: "Dijit Already Did That: Exploring Web Components",
-					speakers: ["Kitson Keylly"],
-					date: new Date(2013, 9, 16)
-				},
-				{
-					title: "i18n - translation in JavaScript",
-					speakers: ["Stefano Solinas"],
-					date: new Date(2013, 08, 10)
-				},
-				{
-					title: "Server-Sent Events: half of the WebSocket, twice the speed",
-					speakers: ["Kornel Lesinski"],
-					date: new Date(2013, 08, 10)
-				},
-				{
-					title: "Nashorn for the Community",
-					speakers: ["Ben Evans"],
-					date: new Date(2013, 07, 13)
-				},
-				{
-					title: "Why Curry?",
-					speakers: ["Hugh Jackson"],
-					date: new Date(2013, 07, 13)
-				}
-			]
+					if (isTomorrow(date)){
+						return "tomorrow";
+					}
+					return moment(date).format("ddd, DD MMM YYYY");
+				});
 
-			var lnugTalks = [
-				{
-					title: "Resin.io - JS on your Raspberry Pi with a simple 'git push'",
-					speakers: ["Alexandros Marinos"],
-					date: new Date(2014, 0, 20)
-				},
-				{
-					title: "UX for your Node modules",
-					speakers: ["Rowan Manning"],
-					date: new Date(2014, 0, 20)
-				},
-				{
-					title: "Megatron - Javascript-to-javascript compiler",
-					speakers: ["Tristan Foureur"],
-					date: new Date(2013, 10, 27)
-				},
-				{
-					title: "Selling Javascript to Clients",
-					speakers: ["Jonathan Anthony"],
-					date: new Date(2013, 10, 27)
-				},
-				{
-					title: "Hoodie plugins",
-					speakers: ["Alan Shaw"],
-					date: new Date(2013, 10, 27)
-				}
-			]
 
-			var templateHtml = $("#meetup-talk-list-template").html(),
-				template = Handlebars.compile(templateHtml);
+				// other fields :video
+				var londonAjaxTalks = [{
+						title: "Using AngularJS and TypeScript",
+						speakers: ["Jamie McCrindle", "Santi Albo"],
+						date: new Date(2014, 0, 14)
+					},
+					{
+						title: "Managing Responsive Design Breakpionts in Javascript",
+						speakers: ["Jonathon Fielding"],
+						date: new Date(2013, 10, 12)
+					},
+					{
+						title: "Building a JavaScript code-quality tracker",
+						speakers: ["Tim Ruffles"],
+						date: new Date(2013, 10, 12)
+					},
+					{
+						title: "Dojo package updates",
+						speakers: ["Dylan Schienemann"],
+						date: new Date(2013, 9, 16)
+					},
+					{
+						title: "Dijit Already Did That: Exploring Web Components",
+						speakers: ["Kitson Keylly"],
+						date: new Date(2013, 9, 16)
+					},
+					{
+						title: "i18n - translation in JavaScript",
+						speakers: ["Stefano Solinas"],
+						date: new Date(2013, 08, 10)
+					},
+					{
+						title: "Server-Sent Events: half of the WebSocket, twice the speed",
+						speakers: ["Kornel Lesinski"],
+						date: new Date(2013, 08, 10)
+					},
+					{
+						title: "Nashorn for the Community",
+						speakers: ["Ben Evans"],
+						date: new Date(2013, 07, 13)
+					},
+					{
+						title: "Why Curry?",
+						speakers: ["Hugh Jackson"],
+						date: new Date(2013, 07, 13)
+					}
+				]
 
-			$(".london-ajax").append(template({talks: londonAjaxTalks}))
-			$(".lnug").append(template({talks: lnugTalks}))
-		</script>
+				var lnugTalks = [
+					{
+						title: "Resin.io - JS on your Raspberry Pi with a simple 'git push'",
+						speakers: ["Alexandros Marinos"],
+						date: new Date(2014, 0, 20)
+					},
+					{
+						title: "UX for your Node modules",
+						speakers: ["Rowan Manning"],
+						date: new Date(2014, 0, 20)
+					},
+					{
+						title: "Megatron - Javascript-to-javascript compiler",
+						speakers: ["Tristan Foureur"],
+						date: new Date(2013, 10, 27)
+					},
+					{
+						title: "Selling Javascript to Clients",
+						speakers: ["Jonathan Anthony"],
+						date: new Date(2013, 10, 27)
+					},
+					{
+						title: "Hoodie plugins",
+						speakers: ["Alan Shaw"],
+						date: new Date(2013, 10, 27)
+					}
+				]
+
+				var templateHtml = $("#meetup-talk-list-template").html(),
+					template = Handlebars.compile(templateHtml);
+
+				$(".london-ajax").append(template({talks: londonAjaxTalks}))
+				$(".lnug").append(template({talks: lnugTalks}))
+
+				var allTalks = londonAjaxTalks.concat(lnugTalks)
+
+				var upcomingTalks = _.filter(allTalks, function(talk){
+					var startOfToday = new Date();
+					startOfToday.setSeconds(0);
+					startOfToday.setMinutes(0);
+					startOfToday.setHours(0);
+					return talk.date.valueOf() > startOfToday.valueOf();
+				})
+
+				$(".upcoming-talks").append(template({talks: upcomingTalks}))
+
+				$("script").not(".keep").remove();
+			</script>
+		</div>
 	</body>
 </html>
