@@ -96,3 +96,16 @@ h2 {
   margin-bottom: 10px;
   margin-top: 20px;
 }
+
+@media (max-width: 769px) {
+  /* line 36, ../sass/screen.scss */
+  body {
+    padding: 10px;
+  }
+
+  /* line 39, ../sass/screen.scss */
+  .talk {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+}

@@ -14,13 +14,7 @@
 
 			<div class="upcoming-talks"></div>
 
-			<h2>Ajax user group</h2>
-
-			<div class="london-ajax"></div>
-
-			<h2>London node user group</h2>
-
-			<div class="lnug"></div>
+			<div class="individual-meetups"></div>
 
 			<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
 			<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -39,26 +33,28 @@
 			  ga('send', 'pageview');
 
 			</script>
-			<script type="template" id="meetup-talk-list-template">
-				<div class="pure-g">
+			<script type="template" id="meetup-talk-list-template" class="keep">
+
 					{{#each talks}}
-						<div class="pure-u-1-2">
-							<h3>
-								{{title}}
-							</h3>
-						</div>
-						<div class="pure-u-1-4">
-							{{#each speakers}}<!--
-								-->{{#if @index}}, {{/if}}{{this}}<!--
-							-->{{/each}}
-						</div>
-						<div class="pure-u-1-4">
-							{{formatDate date}}
-						</div>
+            <div class="pure-g-r talk">
+  						<div class="pure-u-1-2">
+  							<h3>
+  								{{title}}
+  							</h3>
+  						</div>
+  						<div class="pure-u-1-4">
+  							{{#each speakers}}<!--
+  								-->{{#if @index}}, {{/if}}{{this}}<!--
+  							-->{{/each}}
+  						</div>
+  						<div class="pure-u-1-4">
+  							{{formatDate date}}
+  						</div>
+            </div>
 					{{/each}}
-				</div>
+
 			</script>
-			<script>
+			<script class="keep">
 				Handlebars.registerHelper("formatDate", function(date) {
 					function removeTime(date){
 						date.setHours(0);
@@ -133,6 +129,9 @@
 						date: new Date(2013, 07, 13)
 					}
 				]
+				londonAjaxTalks.forEach(function(talk){
+					talk.meetup = "London Ajax Meetup"
+				})
 
 				var lnugTalks = [
 					{
@@ -161,14 +160,73 @@
 						date: new Date(2013, 10, 27)
 					}
 				]
+				lnugTalks.forEach(function(talk){
+					talk.meetup = "London Node User Group"
+				})
+
+        var functionalJsTalks = [
+          {
+            title: "Functional Front-end: ClojureScript",
+            speakers: ["Thomas Kristensen"],
+            date: new Date(2014, 0, 28)
+          }
+        ]
+        functionalJsTalks.forEach(function(talk){
+          talk.meetup = "Functional JS London"
+        })
+
+        var angularJsTalks = [
+          {
+            title: "Dart Flight School Event",
+            speakers: ["Chris Buckett", "Bacon Darwin"],
+            date: new Date(2014, 1, 10)
+          }
+        ]
+        angularJsTalks.forEach(function(talk){
+          talk.meetup = "AnuglarJS London"
+        })
+
+
 
 				var templateHtml = $("#meetup-talk-list-template").html(),
 					template = Handlebars.compile(templateHtml);
 
-				$(".london-ajax").append(template({talks: londonAjaxTalks}))
-				$(".lnug").append(template({talks: lnugTalks}))
+        var meetups = [
+          {
+            id: "london-ajax",
+            name: "Ajax User Group",
+            talks: londonAjaxTalks
+          },
+          {
+            id: "lnug",
+            name: "London Node User Group",
+            talks: lnugTalks
+          },
+          {
+            id: "functional-js",
+            name: "Functional JS",
+            talks: functionalJsTalks
+          },
+          {
+            id: "angular-js",
+            name: "Angular JS",
+            talks: angularJsTalks
+          }
+        ];
 
-				var allTalks = londonAjaxTalks.concat(lnugTalks)
+        $(".individual-meetups").empty();
+        var allTalks = []
+        meetups.forEach(function(meetup){
+          $(".individual-meetups")
+            .append('<h2>' + meetup.name + '</h2>')
+            .append('<div class="' + meetup.id + '"></div>')
+
+          $("." + meetup.id).html(template({talks: meetup.talks}));
+
+          allTalks = allTalks.concat(meetup.talks)
+        });
+
+
 
 				var upcomingTalks = _.filter(allTalks, function(talk){
 					var startOfToday = new Date();
@@ -178,9 +236,7 @@
 					return talk.date.valueOf() > startOfToday.valueOf();
 				})
 
-				$(".upcoming-talks").append(template({talks: upcomingTalks}))
-
-				$("script").not(".keep").remove();
+				$(".upcoming-talks").empty().append(template({talks: upcomingTalks}))
 			</script>
 		</div>
 	</body>
